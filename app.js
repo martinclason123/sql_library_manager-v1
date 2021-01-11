@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const db = require('./models/index')
 
 var app = express();
 
@@ -37,5 +38,15 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+(async ()=>{
+  try{
+    await db.sequelize.sync({ force: true });
+    console.log('Connection to the database successful!');
+  } catch(error){
+    console.error('Error connecting to the database: ', error);
+  }
+
+})();
 
 module.exports = app;
