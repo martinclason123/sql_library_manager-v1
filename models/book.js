@@ -1,4 +1,6 @@
 'use strict';
+
+const { Sequelize } = require('sequelize');
 const {
   Model
 } = require('sequelize');
@@ -14,21 +16,26 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Book.init({
+    id: {
+      type: DataTypes.STRING,
+      autoIncrement: true,
+      primaryKey: true
+    },
     title: {
       type: DataTypes.STRING,
-      allowNull: false, //disallow null
+      allowNull: false,
       validate: {
         notEmpty: {
-          msg: 'Please provide a value for "Title"'
+          msg: 'Title cannot be empty'
         }
       }
     },
     author: {
       type: DataTypes.STRING,
-      allowNull: false, //disallow null
+      allowNull: false,
       validate: {
         notEmpty: {
-          msg: 'Please provide a value for "Author"'
+          msg: 'Author cannot be empty'
         }
       }
     },
