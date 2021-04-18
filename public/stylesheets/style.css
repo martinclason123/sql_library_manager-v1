@@ -98,3 +98,27 @@ input[type=text] {
 .error li {
   list-style: none;
 }
+
+.search-form{
+  margin-left: 25%;
+}
+
+form.search-form input[type=text] {
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: inline-start;
+  background: #f1f1f1;
+}
+
+form.search-form button {
+  color: white;
+  background: #019875;
+  width: 5%;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+  padding: 10px;
+}

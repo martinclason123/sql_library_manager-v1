@@ -30,5 +30,6 @@ block content
             
  div
   each pagination in pagElements    
-   a(class="button" href= pagination.href)= pagination.label
-
+   a(class="button" href= "/search" + pagination.href + "/" + searchString)= pagination.label
+  p 
+   a(class="button" href="/") Clear
