@@ -129,6 +129,13 @@ router.get("/books/new", (req, res, next) => {
 
 // post new book route
 router.post("/books/new", async (req, res, next) => {
+  // object for error form
+  const formDetails = {
+    title: req.body.title,
+    author: req.body.author,
+    genre: req.body.genre,
+    year: parseInt(req.body.year),
+  }
   try {
     const newBook = await book.create({
       title: req.body.title,
@@ -140,7 +147,8 @@ router.post("/books/new", async (req, res, next) => {
   } catch (err) {
     // collects validation errors and redirects the user back to the form along with errors.
     const messagesArray = err.errors;
-    res.render("form-error", { validationErrors: messagesArray });
+    const bookDetails = formDetails;
+    res.render("form-error", { validationErrors: messagesArray, bookDetails, title : "New Book" });
   }
 });
 
@@ -153,6 +161,8 @@ router.get("/books/:id", async (req, res, next) => {
 // updates book details and returns user to index
 router.post("/books/:id", async (req, res, next) => {
   const updatedBook = await book.findByPk(req.params.id);
+  try{
+  
   await updatedBook.update({
     title: req.body.title,
     author: req.body.author,
@@ -160,6 +170,12 @@ router.post("/books/:id", async (req, res, next) => {
     year: parseInt(req.body.year),
   });
   res.redirect("/books");
+} catch(err){
+    // collects validation errors and redirects the user back to the form along with errors.
+    const messagesArray = err.errors;
+    const bookDetails = updatedBook;
+    res.render("update-error", { bookDetails, validationErrors: messagesArray, title : "Update Book" });
+}
 });
 
 // deletes a book and returns user to index

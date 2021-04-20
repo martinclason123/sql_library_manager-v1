@@ -1,11 +1,14 @@
 extends layout
 
 block content
-
  h1 Update Book 
  form(method="POST" action="/books/"+ bookDetails.id)
+  h2(class="error") Ooooops! 
+  ul(class="error")
+  each message in validationErrors
+   li(class="error" style="list-style-type: none;")= message.message
   p
-   label(for="title") title
+   label(for="title") Title
    input(input name="title" type="text" id="title" value= bookDetails.title)
   p
    label(for="author") Author
