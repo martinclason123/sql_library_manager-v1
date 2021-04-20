@@ -155,7 +155,14 @@ router.post("/books/new", async (req, res, next) => {
 // show books detail form
 router.get("/books/:id", async (req, res, next) => {
   const bookDetails = await book.findByPk(req.params.id);
+  try{
   res.render("update-book", { bookDetails, title: bookDetails.title });
+} catch(err){
+  // If the book does not exist, a 404 is thrown
+  if (!bookDetails)
+  err.status = 404;
+  next(err)
+}
 });
 
 // updates book details and returns user to index

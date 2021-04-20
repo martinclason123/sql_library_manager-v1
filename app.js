@@ -52,6 +52,7 @@ app.use(function (req, res, next) {
 
 // error handler
 app.use(function (err, req, res, next) {
+  console.log("global");
   // Handles 404 errors
   if (err.status === 404) {
     err.message = `Sorry! We couldn't find the page you were looking for.`;
